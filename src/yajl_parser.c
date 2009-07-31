@@ -228,11 +228,11 @@ yajl_do_parse(yajl_handle hand, unsigned int * offset,
                             _CC_CHK(hand->callbacks->yajl_number(
                                         hand->ctx,(const char *) buf, bufLen));
                         } else if (hand->callbacks->yajl_integer) {
-                            long int i = 0;
+                            unsigned long long i = 0;
                             yajl_buf_clear(hand->decodeBuf);
                             yajl_buf_append(hand->decodeBuf, buf, bufLen);
                             buf = yajl_buf_data(hand->decodeBuf);
-                            i = strtol((const char *) buf, NULL, 10);
+                            i = strtoull((const char *) buf, NULL, 10);
                             if ((i == LONG_MIN || i == LONG_MAX) &&
                                 errno == ERANGE)
                             {
